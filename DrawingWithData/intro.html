@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Drawing with Data</title>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <script>
+    var w = 200;
+    var h = 500;
+    var padding = 2;
+    var dataset = [5, 10, 15, 20, 25];
+
+    //create SVG
+    var svg = d3.select("body")
+                .append("svg")
+                  .attr("height", h)
+                  .attr("width", w);
+    //select all the rectangles (there are non in the beginning)
+    svg.selectAll("rect")
+      .data(dataset) //bind rectangles with datasets
+      .enter()
+      .append("rect") //add rectangles for each new data element
+        .attr("x", function(d, i) { //d refers to the data element, i refers to the index
+          return i * (w / dataset.length); //iterate thru the dataset (5 times), so 21, 42, 63...
+        })
+        .attr("y", function(d) {
+          return h - (d * 4); //give the illusion that bars are starting from the bottom - playing with the Y
+        })
+        .attr("width", w / dataset.length - padding)
+        .attr("height", function(d) {
+          return d * 4;
+        })
+          .style("fill", "blue");
+  </script>
+</body>
+</html>
