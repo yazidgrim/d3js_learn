@@ -139,6 +139,9 @@
             var xAxis = svg.selectAll("g.x-axis").call(xAxisGen);
 
             var viz = svg.selectAll(".path-" + ds.category)
+                .transition()
+                .duration(200)
+                .ease("linear")
                 .attr({
                         d: linefun(ds.monthlySales)
                     });
